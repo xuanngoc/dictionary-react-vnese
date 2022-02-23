@@ -1,5 +1,5 @@
 import Home from './pages/home';
-import Dictionary from './pages/dictionary';
+import ListWords from './pages/list_words';
 import SearchWord from './pages/seach_word';
 import TestWord from './pages/test-word';
 import Analytics from './pages/analytics';
@@ -14,7 +14,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/tu-dien" element={<Dictionary />} />
+        <Route path="/danh-sach-tu" element={<ListWords />} />
         <Route path="/tra-cuu" element={<SearchWord />} />
         <Route path="/kiem-tra" element={<TestWord />} />
         <Route path="/thong-ke" element={<Analytics />} />
