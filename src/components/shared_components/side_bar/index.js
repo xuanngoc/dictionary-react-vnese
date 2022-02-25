@@ -10,7 +10,6 @@ const SideBar = () => {
       <hr></hr>
       <ul className="mt-24">
         <li><Link to="/danh-sach-tu">Danh sách từ</Link></li>
-        <li><Link to="/tra-cuu">Tra cứu</Link></li>
         <li><Link to="/kiem-tra">Làm bài kiểm tra</Link></li>
         <li><Link to="/thong-ke">Thống kê</Link></li>
 
