@@ -14,11 +14,39 @@ const customStyles = {
   },
 };
 
-const EditWordModal = ({wordEditing, modalIsOpen, closeModal}) => {
+const EditWordModal = ({wordEditing, submitEdit, modalIsOpen, closeModal}) => {
   const [wordWrite, setWordWrite] = useState();
-  const [phonetic, setPhonetic] = useState();
-  const [meaning, setMeaning] = useState();
+  const [phonetic, setPhonetic] = useState(wordEditing?.phonetic);
+  const [meaning, setMeaning] = useState(wordEditing?.meaning);
+
+  const onChangeWordWrite = (e) => {
+    setWordWrite(e.target.value)
+  }
   
+  const onChangePhonetic = (e) => {
+    setPhonetic(e.target.value)
+  }
+  
+  const onChangeMeaning = (e) => {
+    setMeaning(e.target.value)
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    submitEdit({
+      id: wordEditing.id,
+      word: wordWrite,
+      phonetic: phonetic,
+      meaning: meaning
+    })
+  }
+
+  useEffect(() => {
+    setWordWrite(wordEditing?.word)
+    setPhonetic(wordEditing?.phonetic)
+    setMeaning(wordEditing?.meaning)
+  }, [wordEditing])
+
   return (
     <>
     { wordEditing ?  
@@ -26,6 +54,7 @@ const EditWordModal = ({wordEditing, modalIsOpen, closeModal}) => {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         style={customStyles}
+        ariaHideApp={false}
         contentLabel="Example Modal"
       >
         <div className="flex justify-end">
@@ -35,30 +64,30 @@ const EditWordModal = ({wordEditing, modalIsOpen, closeModal}) => {
         </div>
         <h2 className="text-xl text-center">Sửa từ</h2>
         
-        <form className="mx-12">
+        <form className="mx-12" onSubmit={onSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Từ
             </label>
-            <input className=" border rounded  py-2 px-3 text-gray-700 leading-tight focus:shadow-outline" type="text" value={wordEditing.word}  />
+            <input className=" border rounded  py-2 px-3 text-gray-700 leading-tight focus:shadow-outline" type="text" value={wordWrite} onChange={onChangeWordWrite}  />
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Phiên âm
             </label>
-            <input className=" border rounded  py-2 px-3 text-gray-700 leading-tight focus:shadow-outline" type="text" value={wordEditing.phonetic}/>
+            <input className=" border rounded  py-2 px-3 text-gray-700 leading-tight focus:shadow-outline" type="text" value={phonetic} onChange={onChangePhonetic}/>
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Ngữ nghĩa
             </label>
-            <input className=" border rounded  py-2 px-3 text-gray-700 leading-tight focus:shadow-outline" type="text" value={wordEditing.meaning} />
+            <input className=" border rounded  py-2 px-3 text-gray-700 leading-tight focus:shadow-outline" type="text" value={meaning} onChange={onChangeMeaning} />
           </div>
       
-          <button className="bg-zinc-500 hover:bg-zinc-700 px-7 py-3 m-auto block rounded">OK</button>
+          <input className="bg-zinc-500 hover:bg-zinc-700 px-7 py-3 m-auto block rounded" type="submit" value="OK" />
         </form>
       </Modal>
-      : <h1>Loading...</h1>
+      : <></>
     }
     </>
   )
