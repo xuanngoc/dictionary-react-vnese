@@ -15,7 +15,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/danh-sach-tu" element={<ListWords />} />
         <Route path="/kiem-tra" element={<TestWord />} />
-        <Route path="/thong-ke" element={<Analytics />} />
+        <Route path="/thong-ke/tu-hoc-duoc" element={<Analytics />} />
+        <Route path="/thong-ke/nho-quen" element={<Analytics />} />
       </Routes>
     </BrowserRouter>
   );
