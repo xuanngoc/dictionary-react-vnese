@@ -18,7 +18,7 @@ const TestWord = () => {
       const response = await axios.get('https://demo0995292.mockable.io/words');
       setWords(response.data.words);
     } catch (error) {
-      setWords(WORDS);
+      // setWords(WORDS);
       console.error(error.message);
     }
   }
@@ -43,7 +43,7 @@ const TestWord = () => {
 
   useEffect(() => {
     fetchData();
-  }, [words])
+  }, [])
 
   return (
     <MainLayout>

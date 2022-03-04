@@ -27,8 +27,8 @@ const AnswerGroup = ({words, testWord, correct, incorrect, nextWord}) => {
     let answerD = testWord;
 
     let combinationAnswers = [
-      { a: answerA, b: answerB, c: answerC, d: answerD }, 
-      { a: answerB, b: answerA, c: answerD, d: answerC }, 
+      { a: answerA, b: answerB, c: answerC, d: answerD },
+      { a: answerB, b: answerA, c: answerD, d: answerC },
       { a: answerC, b: answerD, c: answerA, d: answerB },
       { a: answerD, b: answerB, c: answerC, d: answerA }
     ]
@@ -47,9 +47,7 @@ const AnswerGroup = ({words, testWord, correct, incorrect, nextWord}) => {
 
   useEffect(() => {
     if (words && testWord) {
-      console.log(testWord)
       const answers = generateAnswers();
-      console.log(answers)
       setAnswers(answers);
     }
   }, [words, testWord])
@@ -57,7 +55,7 @@ const AnswerGroup = ({words, testWord, correct, incorrect, nextWord}) => {
   return (
     <>
       {
-        answers && 
+        answers &&
         <div className="text-2xl mt-24">
           <div className="flex justify-center mb-6">
             <button className="w-64 py-6 bg-blue-200 hover:bg-blue-800 mr-6 rounded" onClick={onSelectAnswer} >{answers.a.meaning}</button>
@@ -70,7 +68,7 @@ const AnswerGroup = ({words, testWord, correct, incorrect, nextWord}) => {
         </div>
       }
     </>
-    
+
   )
 }
 
