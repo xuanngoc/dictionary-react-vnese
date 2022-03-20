@@ -7,6 +7,7 @@ import EditWordModal from "../components/list_words/edit_word_modal";
 import ConfirmDeleteWordModal from "../components/list_words/confirm_delete_word_modal";
 import SearchWordForm from '../components/list_words/search_word_form';
 import { WORDS } from "../constants";
+import AddWordModal from '../components/list_words/add_word_modal';
 
 const ListWords = () => {
   const [words, setWords] = useState([]);
@@ -14,6 +15,8 @@ const ListWords = () => {
 
   const [loading, setLoading] = useState(true);
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
+  const [addModalIsOpen, setAddModalIsOpen] = useState(false);
+
   const [confirmDeleteModalIsOpen, setConfirmDeleteModalIsOpen] = useState(false);
   const [wordEditing, setWordEditing] = useState();
   const [wordDeleting, setWordDeleting] = useState();
@@ -31,6 +34,22 @@ const ListWords = () => {
     setLoading(false);
   }
 
+  const openAddModal = () => {
+    setAddModalIsOpen(true);
+  }
+
+  const closeAddModal = () => {
+    setAddModalIsOpen(false);
+  }
+
+  const submitAdd = (word) => {
+    const tmp = words.slice()
+    tmp.push(word)
+    setWords(tmp)
+    closeAddModal()
+  }
+
+
   const openEditModal = (word) => {
     setEditModalIsOpen(true);
     setWordEditing(word)
@@ -39,7 +58,7 @@ const ListWords = () => {
   const closeEditModal = () => {
     setEditModalIsOpen(false);
   }
-  
+
   const submitEdit = (word) => {
     words.map((w, index) => {
       if (word.id == w.id) {
@@ -60,7 +79,7 @@ const ListWords = () => {
   const closeDeleteModal = () => {
     setConfirmDeleteModalIsOpen(false);
   }
-  
+
   const submitDelete = () => {
     words.map((w, index) => {
       if (wordDeleting.id == w.id) {
@@ -71,7 +90,7 @@ const ListWords = () => {
     setWords(words);
     closeDeleteModal()
   }
-  
+
   const setSearchWord = (input) => {
     if (!input) {
       return setWords(defaultWords);
@@ -94,6 +113,9 @@ const ListWords = () => {
 
       <SearchWordForm setSearchWord={setSearchWord} />
 
+      <div className="flex justify-end mr-40">
+        <button className="bg-zinc-500 hover:bg-zinc-700 px-5 py-2 border-b mr-2 rounded" onClick={openAddModal}>Thêm</button>
+      </div>
       <div className="flex mx-36 mt-12">
         <table className="table-auto border border-slate-400 flex-auto text-center">
           <thead>
@@ -106,7 +128,7 @@ const ListWords = () => {
             </tr>
           </thead>
           <tbody>
-          { 
+          {
             words.map((word, index) => {
               return (
                 <tr key={word.id}>
@@ -126,6 +148,7 @@ const ListWords = () => {
         </table>
       </div>
 
+      <AddWordModal modalIsOpen={addModalIsOpen} submitAdd={submitAdd} closeModal={closeAddModal} />
       <EditWordModal modalIsOpen={editModalIsOpen} submitEdit={submitEdit} closeModal={closeEditModal} wordEditing={wordEditing} />
       <ConfirmDeleteWordModal modalIsOpen={confirmDeleteModalIsOpen} submitDelete={submitDelete} closeModal={closeDeleteModal} wordDeleting={wordDeleting} />
     </MainLayout>
