@@ -93,7 +93,7 @@ const AnalyticsWordRememberMiss = () => {
     getDataPointsRemember(month, year);
     getDataPointsMiss(month, year);
     getDataPointsRate(month, year);
-  }, [year, month])
+  }, [month, year])
 
   return (
     <MainLayout>
